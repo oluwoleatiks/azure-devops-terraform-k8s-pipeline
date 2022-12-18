@@ -17,7 +17,7 @@ steps:
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    # commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'AzureDevop-to-AzurePortal'
     backendAzureRmSubscriptionId: '1f383e16-bfa1-4792-867b-0417ed159814'
@@ -27,4 +27,15 @@ steps:
     backendAzureRmStorageAccountName: 'storageacctsurexyds'
     backendAzureRmContainerName: 'storageacctsurecontainer'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
+    allowTelemetryCollection: true
+
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
+    environmentServiceName: 'AzureDevop-to-AzurePortal'
+    providerAzureRmSubscriptionId: '1f383e16-bfa1-4792-867b-0417ed159814'
+    runAzLogin: true
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     allowTelemetryCollection: true
