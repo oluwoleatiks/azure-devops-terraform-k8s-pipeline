@@ -15,7 +15,7 @@ variable cluster_name {
 }
 
 variable resource_group_name {
-  default = "k8s1-rg"
+  default = "k8s2-rg"
 }
 
 variable location {
